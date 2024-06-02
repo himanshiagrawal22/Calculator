@@ -15,9 +15,12 @@ function clearDisplay()
     inputbox.value=inputbox.value.slice(0,-1);
 }
 
-function calculate()
-{
-let res=inputbox.value;
-let y=eval(res);
-inputbox.value=y;
+function calculate() {
+    try {
+        // Handle percentage conversion before evaluating
+        let expression = inputbox.value.replace(/%/g, '/100');
+        inputbox.value = eval(expression.replace(/X/g, '*'));
+    } catch {
+        inputbox.value = "Error";
+    }
 }
